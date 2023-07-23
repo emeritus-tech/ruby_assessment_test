@@ -13,10 +13,15 @@ class EnrollmentsController < ApplicationController
   # GET /enrollments/new
   def new
     @enrollment = Enrollment.new
+    @programs = Program.all
+    @users = User.all
   end
 
   # GET /enrollments/1/edit
   def edit
+    enrollment = Enrollment.find_by(id: params[:id])
+    @users = User.includes(:enrollments_as_teacher, :favorite_teachers)
+    @programs = Program.all
   end
 
   # POST /enrollments or /enrollments.json
@@ -65,6 +70,6 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def enrollment_params
-      params.require(:enrollment).permit(:user_id, :teacher_id)
+      params.require(:enrollment).permit(:user_id, :teacher_id, :program_id, :favorite, :student_id)
     end
 end
