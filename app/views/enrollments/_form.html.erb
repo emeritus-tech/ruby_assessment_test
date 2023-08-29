@@ -12,13 +12,20 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.label :user_id, 'Student' %>
+    <%= form.collection_select(:user_id, @users, :id, :name) %>
   </div>
-
+    <div>
+    <%= form.label :teacher_id, 'Teacher' %>
+    <%= form.collection_select(:teacher_id, @users, :id, :name) %>
+  </div>
   <div>
-    <%= form.label :teacher_id, style: "display: block" %>
-    <%= form.number_field :teacher_id %>
+    <%= form.label :program_id, 'Program' %>
+    <%= form.collection_select(:program_id, @programs, :id, :name) %>
+  </div>
+  <div>
+    <%= form.check_box :favorite %>
+    <%= form.label :favorite, 'Favorite Teacher' %>
   </div>
 
   <div>
